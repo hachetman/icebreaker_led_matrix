@@ -8,14 +8,14 @@ macro(fpga_build_project)
     PCF_FILE
     HDL_INCLUDE
     )
-  
+
   cmake_parse_arguments(FPGA "${options}" "${oneValueArgs}"
     "${multiValueArgs}" ${ARGN} )
   message("Creating an FPGA Build for Target '${FPGA_TARGET}'")
   message(${FPGA_TOP_LEVEL_VERILOG})
-  
+
   add_custom_target(${FPGA_TARGET}.json
-    COMMAND yosys -ql ${FPGA_TARGET}.yslog -p 'synth_ice40 -top top_level -json ${FPGA_TARGET}.json' ${FPGA_TOP_LEVEL_VERILOG} ${FPGA_HDL_INCLUDE}/*)
+    COMMAND yosys -ql ${FPGA_TARGET}.yslog -p 'synth_ice40 -top top_level -json ${FPGA_TARGET}.json' ${FPGA_HDL_INCLUDE}/*)
   add_custom_target(${FPGA_TARGET}.asc
     COMMAND echo ${CMAKE_CURRENT_BINARY_DIR}
     COMMAND echo ${CMAKE_CURRENT_LIST_DIR}
@@ -30,5 +30,5 @@ macro(fpga_build_project)
   add_custom_target(${FPGA_TARGET}.prog
     DEPENDS ${FPGA_TARGET}.bin
     COMMAND iceprog ${FPGA_TARGET}.bin)
- 
+
 endmacro()
