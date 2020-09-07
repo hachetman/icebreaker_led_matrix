@@ -186,19 +186,4 @@ module led_driver
         .y(y1),
         .rgb(rgb1));
 
-    ddr led_blank_ddr(
-        .clk(clk),
-        .data(blank),
-        .ddr_pin(led_blank));
-
-    ddr led_latch_ddr(
-        .clk(clk),
-        .data(latch),
-        .ddr_pin(led_latch));
-
-    ddr led_sclk_ddr(
-        .clk(clk),
-        .data(sclk),
-        .ddr_pin(led_sclk));
-
 endmodule // led_driver
